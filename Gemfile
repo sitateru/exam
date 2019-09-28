@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.4'
 
-#add
+#add for windows
 gem 'wdm', '>= 0.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
