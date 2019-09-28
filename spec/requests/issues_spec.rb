@@ -23,5 +23,19 @@ RSpec.describe "Issues", type: :request do
     it { expect(response.code).to eq "200" }
     it { expect(response_body.payload.body).to eq "body" }
   end
-  
+
+  describe "#01-01" do
+    #
+  end
+
+  describe "#01-02" do
+    let(:params) {
+      { issue: { title: "title", body: "body" } }
+    }
+    before { post "/issues", params: params }
+    let(:response_body) { JSON.parse(response.body, object_class: OpenStruct) }
+    it { expect(response.code).to eq "200" }
+    it { expect(response_body.payload.kind).to eq "problem" }
+  end
+
 end
