@@ -25,7 +25,10 @@ RSpec.describe "Issues", type: :request do
   end
 
   describe "#01-01" do
-    #
+    let(:params) {
+      { issue: { body: "body", kind: :try } }
+    }
+    it { expect{ post "/issues", params: params }.to raise_error(ActiveRecord::NotNullViolation) }
   end
 
   describe "#01-02" do
