@@ -3,7 +3,7 @@ class CreateIssues < ActiveRecord::Migration[5.2]
     create_table :issues do |t|
       t.string :title
       t.text :body
-      t.integer :kind
+      t.integer :kind, default: 3
 
       t.timestamps
     end
