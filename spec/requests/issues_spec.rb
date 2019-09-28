@@ -24,14 +24,14 @@ RSpec.describe "Issues", type: :request do
     it { expect(response_body.payload.body).to eq "body" }
   end
 
-  describe "#01-01" do
+  describe "#01:title must be a required field" do
     let(:params) {
       { issue: { body: "body", kind: :try } }
     }
     it { expect{ post "/issues", params: params }.to raise_error(ActiveRecord::NotNullViolation) }
   end
 
-  describe "#01-02" do
+  describe "#01:default value of kind must be problem" do
     let(:params) {
       { issue: { title: "title", body: "body" } }
     }
