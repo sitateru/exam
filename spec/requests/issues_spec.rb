@@ -41,4 +41,42 @@ RSpec.describe "Issues", type: :request do
     it { expect(response_body.payload.kind).to eq "problem" }
   end
 
+  describe "#02:update record"  do
+    let(:ins_params) {
+      { issue: { title: "update test", body: "before update" } }
+    }
+    before { post "/issues", params: ins_params }
+    let(:ins_response_body) { JSON.parse(response.body, object_class: OpenStruct) }
+    it { expect(response.code).to eq "200" }
+    it { expect(ins_response_body.payload.body).to eq "before update" }
+    let(:target) { ins_response_body.payload }
+
+    let(:upd_params) {
+      { issue: { id: target.id, title: target.title, body: "updated", kind: target.kind } }
+    }
+    before { post "/issues/update", params: upd_params }
+    let(:upd_response_body) { JSON.parse(response.body, object_class: OpenStruct) }
+    it { expect(response.code).to eq "200" }
+    it { expect(upd_response_body.payload.id.to_i).to eq target.id }
+    it { expect(upd_response_body.payload.body).to eq "updated" }
+  end
+
+  describe "#02:delete record"  do
+    let(:ins_params) {
+      { issue: { title: "delete test", body: "before delete" } }
+    }
+    before { post "/issues", params: ins_params }
+    let(:ins_response_body) { JSON.parse(response.body, object_class: OpenStruct) }
+    it { expect(response.code).to eq "200" }
+    let(:target) { ins_response_body.payload }
+
+    let(:del_params) {
+      { issue: { id: target.id, del_flg: 1 } }
+    }
+    before { post "/issues/delete", params: del_params }
+    let(:upd_response_body) { JSON.parse(response.body, object_class: OpenStruct) }
+    it { expect(response.code).to eq "200" }
+    
+  end
+
 end
