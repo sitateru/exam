@@ -4,7 +4,7 @@ RSpec.describe "Issues", type: :request do
 
   describe "#index" do
     let!(:issue) { Issue.create(title: "title", body: "body", kind: :try) }
-    
+
     before { get "/issues" }
     let(:response_body) { JSON.parse(response.body, object_class: OpenStruct) }
 
@@ -76,7 +76,7 @@ RSpec.describe "Issues", type: :request do
     before { post "/issues/delete", params: del_params }
     let(:del_response_body) { JSON.parse(response.body, object_class: OpenStruct) }
     it { expect(response.code).to eq "200" }
-    it { expect(del_response_body.payload.del_flg.to_i).to eq 1 }
+    it { expect(del_response_body.payload.del_flg.to_i).to eq 0 } #エラーにする
   end
 
 end
