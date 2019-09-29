@@ -15,15 +15,17 @@ class IssuesController < ApplicationController
 
   def update
     if Issue.where( id: issue_params[:id] ).update( title: issue_params[:title], body: issue_params[:body], kind: issue_params[:kind] )
-      render_ok(issue_params)
+      issue = Issue.find(issue_params[:id])
+      render_ok(issue)
     else
       render_ng(400, issue.errors)
     end
   end
 
   def delete
-    if Issue.where( id: issue_params[:id] ).update( title: issue_params[:del_flg] )
-      render_ok(issue_params)
+    if Issue.where( id: issue_params[:id] ).update( del_flg: issue_params[:del_flg] )
+      issue = Issue.find(issue_params[:id])
+      render_ok(issue)
     else
       render_ng(400, issue.errors)
     end

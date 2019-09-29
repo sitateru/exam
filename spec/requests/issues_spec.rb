@@ -74,9 +74,9 @@ RSpec.describe "Issues", type: :request do
       { issue: { id: target.id, del_flg: 1 } }
     }
     before { post "/issues/delete", params: del_params }
-    let(:upd_response_body) { JSON.parse(response.body, object_class: OpenStruct) }
+    let(:del_response_body) { JSON.parse(response.body, object_class: OpenStruct) }
     it { expect(response.code).to eq "200" }
-    
+    it { expect(del_response_body.payload.del_flg.to_i).to eq 1 }
   end
 
 end
