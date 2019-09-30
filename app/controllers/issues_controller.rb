@@ -22,7 +22,7 @@ class IssuesController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     if Issue.where( id: issue_params[:id] ).update( del_flg: issue_params[:del_flg] )
       issue = Issue.find(issue_params[:id])
       render_ok(issue)
