@@ -13,9 +13,10 @@
 ActiveRecord::Schema.define(version: 2019_09_18_012131) do
 
   create_table "issues", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.text "body"
-    t.integer "kind"
+    t.integer "kind", default: 3
+    t.integer "del_flg", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
