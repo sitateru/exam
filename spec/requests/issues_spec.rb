@@ -23,5 +23,22 @@ RSpec.describe "Issues", type: :request do
     it { expect(response.code).to eq "200" }
     it { expect(response_body.payload.body).to eq "body" }
   end
-  
+
+  describe "#01:title must be a required field" do
+    let(:params) {
+      { issue: { body: "body", kind: :try } }
+    }
+    it { expect{ post "/issues", params: params }.to raise_error(ActiveRecord::NotNullViolation) }
+  end
+
+  describe "#01:default value of kind must be problem" do
+    let(:params) {
+      { issue: { title: "title", body: "body" } }
+    }
+    before { post "/issues", params: params }
+    let(:response_body) { JSON.parse(response.body, object_class: OpenStruct) }
+    it { expect(response.code).to eq "200" }
+    it { expect(response_body.payload.kind).to eq "problem" }
+  end
+
 end
