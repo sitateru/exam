@@ -43,7 +43,7 @@ jobs: # a collection of steps
 
       - run:
           name: Database setup
-          command: bin/rails db:create  || bin/rails db:migrate RAILS_ENV=deployment || bin/rails db:seed RAILS_ENV=deployment
+          command: bin/rails db:create  || bin/rails db:migrate RAILS_ENV=test || bin/rails db:seed RAILS_ENV=test
 
       - run:
           name: Run rspec in parallel
