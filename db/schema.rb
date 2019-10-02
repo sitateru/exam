@@ -10,12 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_18_012131) do
+ActiveRecord::Schema.define(version: 2019_10_01_181100) do
 
   create_table "issues", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.text "body"
-    t.integer "kind"
+    t.integer "kind", default: 3
+    t.integer "del_flg", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "mail_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
